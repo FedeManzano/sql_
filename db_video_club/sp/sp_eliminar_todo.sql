@@ -1,0 +1,27 @@
+USE db_video_club;
+
+GO
+CREATE PROCEDURE sp_Eliminar_Tablas
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+
+		DISABLE TRIGGER tg_Dar_Baja_Cliente ON Cliente
+
+
+		DROP TABLE Alquiler
+		DROP TABLE Ejemplar
+		DROP TABLE Pelicula
+		DROP TABLE Cliente
+		DROP TABLE Genero
+		DROP TABLE Director	
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			ROLLBACK TRANSACTION
+	END CATCH
+END
+GO

@@ -1,0 +1,8 @@
+--USE db_viajes
+
+
+GO
+CREATE VIEW vw_GET_RAND
+AS
+SELECT RAND() AS RND
+GO

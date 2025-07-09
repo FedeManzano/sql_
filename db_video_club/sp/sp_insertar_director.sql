@@ -1,0 +1,43 @@
+USE db_video_club;
+
+GO
+CREATE PROCEDURE sp_Insertar_Director
+@NOMBRE_DIR VARCHAR(20),
+@APELLIDO_DIR VARCHAR(20)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	BEGIN TRY
+		IF @NOMBRE_DIR IS NULL OR
+			@NOMBRE_DIR LIKE '%[^a-zA-Z ]%'
+		BEGIN
+			PRINT ('Nombre del director es erroneo')
+			ROLLBACK
+			RETURN
+		END
+
+		IF @APELLIDO_DIR IS NULL OR
+			@APELLIDO_DIR LIKE '%[^a-zA-Z ]%'
+		BEGIN
+			PRINT ('Apellido del director es erroneo')
+			ROLLBACK
+			RETURN
+		END
+
+		DECLARE @ID_DIR TINYINT = (SELECT COUNT(1) FROM Director) +1 
+
+		SET @NOMBRE_DIR = TRIM(UPPER(@NOMBRE_DIR))
+		SET @APELLIDO_DIR = TRIM(UPPER(@APELLIDO_DIR))
+
+		INSERT INTO Director(IdDirector, NombreDirector, ApellidoDirector)
+		VALUES
+		(@ID_DIR, @NOMBRE_DIR, @APELLIDO_DIR)
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			ROLLBACK
+	END CATCH
+END
+GO
