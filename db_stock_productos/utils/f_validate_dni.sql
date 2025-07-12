@@ -1,7 +1,7 @@
-USE db_con_visual_studio
+
 
 GO
-CREATE OR ALTER FUNCTION f_Validar_Dni(@DNI VARCHAR(10))
+ALTER FUNCTION f_Validar_Dni(@DNI VARCHAR(10))
 RETURNS INT
 AS
 BEGIN

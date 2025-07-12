@@ -1,7 +1,7 @@
 USE db_video_club;
 
 
--- 1. Listar los clientes que no hayan reportado préstamos del rubro “Policial”
+-- 1. Listar los clientes que no hayan reportado prï¿½stamos del rubro ï¿½Policialï¿½
 GO
 ALTER FUNCTION f_Clientes_No_Genero (@GENERO_NOMBRE VARCHAR(20))
 RETURNS TABLE
@@ -22,7 +22,7 @@ AS
 			)
 		)
 	)
-
+GO
 
 SELECT * FROM dbo.f_Clientes_No_Genero('POLICIAL')
 SELECT * FROM dbo.f_Clientes_No_Genero('SUPER HEROES')
@@ -31,7 +31,7 @@ SELECT * FROM dbo.f_Clientes_No_Genero('DRAMA')
 SELECT * FROM Cliente
 
 
--- 2. Listar las películas de mayor duración que alguna vez fueron prestadas.
+-- 2. Listar las pelï¿½culas de mayor duraciï¿½n que alguna vez fueron prestadas.
 
 GO
 CREATE FUNCTION f_Duracion_Max_Pel_Alq() 
@@ -53,12 +53,13 @@ AS
 			)
 		)	
 	)
+GO
 
 SELECT * FROM dbo.f_Duracion_Max_Pel_Alq()
 
 
--- 3 - Listar los clientes que tienen más de un préstamo sobre la misma película (listar
--- Cliente, Película y cantidad de préstamos).
+-- 3 - Listar los clientes que tienen mï¿½s de un prï¿½stamo sobre la misma pelï¿½cula (listar
+-- Cliente, Pelï¿½cula y cantidad de prï¿½stamos).
 GO
 CREATE FUNCTION f_Clientes_Aquiler_Misma_Pelicula()
 RETURNS TABLE
@@ -79,13 +80,13 @@ AS
 			) AS CLIENTE_MISMA_PELICULA
 		)	
 	)
-
+GO
 
 SELECT * FROM dbo.f_Clientes_Aquiler_Misma_Pelicula()
 
 
--- 4. Listar los clientes que han realizado préstamos del título “Rey León” y “Terminador
--- 3” (Ambos).
+-- 4. Listar los clientes que han realizado prï¿½stamos del tï¿½tulo ï¿½Rey Leï¿½nï¿½ y ï¿½Terminador
+-- 3ï¿½ (Ambos).
 
 GO
 CREATE FUNCTION f_Alquilaron_Las_Peliculas(@PEL1 VARCHAR(50), @PEL2 VARCHAR(50))
@@ -111,11 +112,11 @@ AS
 			WHERE pel.Titulo = @PEL2
 		)
 	)
-
+GO
 
 SELECT * FROM dbo.f_Alquilaron_Las_Peliculas('EL CONJUTO I', 'EL CONJUTO II')
 
--- 5. Listar las películas más vistas en cada mes (Mes, Película, Cantidad de Alquileres).
+-- 5. Listar las pelï¿½culas mï¿½s vistas en cada mes (Mes, Pelï¿½cula, Cantidad de Alquileres).
 SELECT MES, alq.CodPel, MAX_CANT
 FROM
 (
@@ -143,6 +144,7 @@ AS
 	FROM Alquiler alq
 	GROUP BY MONTH(alq.FechaAlq), alq.CodPel	
 
+GO
 CREATE VIEW Mas_Vistas_Por_Mes
 AS
 	SELECT CANT_VISTAS.MES ,MAX(CANT_VISTAS.CANT) MAX_CANT
@@ -161,11 +163,12 @@ AS
 		FROM Alquiler a
 		WHERE a.CodPel = alq.CodPel
 	)
+GO
 
 SELECT MV.MES, pel.Titulo, MV.MAX_CANT
 FROM MES_PELICULA_CANTIDAD_MAYOR MV INNER JOIN Pelicula pel ON MV.CodPel = pel.CodPel
 
---6. Listar los clientes que hayan alquilado todas las películas del video. 
+--6. Listar los clientes que hayan alquilado todas las pelï¿½culas del video. 
 SELECT alq.CodCli 
 FROM Alquiler alq
 GROUP BY alq.CodCli
@@ -176,7 +179,7 @@ HAVING COUNT(DISTINCT alq.CodPel) >=
 )
 
 
--- 7. Listar las películas que no han registrado ningún préstamo a la fecha. 
+-- 7. Listar las pelï¿½culas que no han registrado ningï¿½n prï¿½stamo a la fecha. 
 SELECT *
 FROM Cliente cli
 WHERE cli.CodCli NOT IN
@@ -184,13 +187,13 @@ WHERE cli.CodCli NOT IN
 	SELECT alq.CodCli FROM Alquiler alq
 )
 
---8. Listar los clientes que no han efectuado la devolución de ejemplares.
+--8. Listar los clientes que no han efectuado la devoluciï¿½n de ejemplares.
 SELECT alq.CodCli
 FROM Alquiler alq
 WHERE alq.FechaDev IS NULL
 
 
--- 9. Listar los títulos de las películas que tienen la mayor cantidad de préstamos.
+-- 9. Listar los tï¿½tulos de las pelï¿½culas que tienen la mayor cantidad de prï¿½stamos.
 
 SELECT pel.CodPel, pel.Titulo, pel.Duracion, pel.IdDirector, pel.IdGenero,CANT_MAX_PELICULA.CANT_MAX CANTIDAD_AQL
 FROM 
@@ -210,7 +213,7 @@ FROM
 	) 
 ) AS CANT_MAX_PELICULA INNER JOIN Pelicula pel ON pel.CodPel = CANT_MAX_PELICULA.C_PELICULA
 
--- 10. Listar las películas que tienen todos los ejemplares prestados. 
+-- 10. Listar las pelï¿½culas que tienen todos los ejemplares prestados. 
 
 SELECT eje.CodPel, COUNT(DISTINCT eje.NroEj)
 FROM Ejemplar eje

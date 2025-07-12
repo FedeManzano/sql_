@@ -1,14 +1,14 @@
 /**
-	Crea una cadena numérica de @SIZE números 
+	Crea una cadena numï¿½rica de @SIZE nï¿½meros 
 	Para su uso es necesario crear la vista:
 	CREATE VIEW vw_GET_RAND
 	AS
-		SELECT RAND() -- Devuelve un número aleatorio 0 - 1
-	Parámetros
-	@SIZE Cantidad de números de la cadena
+		SELECT RAND() -- Devuelve un nï¿½mero aleatorio 0 - 1
+	Parï¿½metros
+	@SIZE Cantidad de nï¿½meros de la cadena
 */
 GO
-CREATE FUNCTION f_Random_Numbers (@SIZE BIGINT)
+CREATE OR ALTER FUNCTION f_Random_Numbers (@SIZE BIGINT)
 RETURNS VARCHAR(MAX)
 AS
 BEGIN

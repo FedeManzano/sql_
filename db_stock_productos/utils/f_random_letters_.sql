@@ -1,18 +1,17 @@
-USE db_con_visual_studio
+
 /**
-	Funciï¿½n de devuelve una cadena con letras aleatorias
+	Función de devuelve una cadena con letras aleatorias
 	Para su uso es necesario crear la vista:
 	CREATE VIEW vw_GET_RAND
 	AS
-		SELECT RAND() -- Devuelve un nï¿½mero aleatorio 0 - 1
-	Parï¿½metros
+		SELECT RAND() -- Devuelve un número aleatorio 0 - 1
+	Parámetros
 	@SIZE Cantidad de letras de la cadena
-	@IS_UPPER	1 las letras van a estar en mayï¿½sculas
-				0 las letras van a estar en minï¿½sculas
-	Por default @IS_UPPER es 0
+	@IS_UPPER	1 las letras van a estar en mayúsculas
+				0 las letras van a estar en minúsculas
 */
 GO
-CREATE OR ALTER FUNCTION f_Random_Letters (@SIZE SMALLINT, @IS_UPPER TINYINT = 0)
+CREATE FUNCTION f_Random_Letters (@SIZE SMALLINT, @IS_UPPER TINYINT)
 RETURNS VARCHAR(MAX)
 AS
 BEGIN
@@ -35,7 +34,7 @@ BEGIN
 	WHILE @I < @SIZE
 	BEGIN
 		DECLARE @RAN INT = FLOOR((SELECT * FROM vw_GET_RAND) * (LEN(@LETTER))) + 1
-		SET @RSTRING = @RSTRING + SUBSTRING(@LETTER, @RAN, 1)
+		SET @RSTRING = UPPER(@RSTRING + SUBSTRING(@LETTER, @RAN, 1))
 		SET @I = @I + 1 
 	END
 	RETURN @RSTRING
