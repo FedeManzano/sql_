@@ -103,10 +103,11 @@ WHERE f.DniPersona NOT IN
 
     Si 32595830 Frecuenta los dos bares el resultado va a ser
 
-    32595830, La juakina RESULTADO
+    VACIO no hay resultados
 
     -- ESTE NO VA A ESTAR EN EL RESULTADO PORQUE VENDE UNA CERVEZA QUE NO LE GUSTA
     32595830, Cosmos // Este bar vende todas las que le gustan pero una que no
+    Esta situación descarta a la persona
 */
 SELECT *
 FROM Persona p 
