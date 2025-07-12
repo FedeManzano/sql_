@@ -1,12 +1,7 @@
 USE db_bares;
 
-
-EXEC sp_Insertar_Persona '3/455548', 'esteban'
-
-SELECT * FROM Cerveza
-
 GO
-CREATE PROCEDURE sp_Insertar_Datos_Prueba
+CREATE OR ALTER PROCEDURE sp_Insertar_Datos_Prueba
 AS
 BEGIN
 	BEGIN TRANSACTION
@@ -63,8 +58,7 @@ BEGIN
 		('25444666', 'LA JUAKINA'),
 		('25444666', 'COSMOS'),
 		('27888444', 'SHERLOCK')
-
-	
+		
 		INSERT INTO Gusta(DniPersona, NombreCerveza) VALUES
 		('32595830', 'BRAMA'),
 		('32595830', 'STELLA'),
@@ -85,5 +79,5 @@ BEGIN
 	END CATCH
 END
 GO
-
-DELETE FROM Frecuenta WHERE DniPersona = '32595830' AND NombreBar = 'COSMOS'
+-- Esto para que el ejercicio 4 arroje un resultado, sino sería vacío
+-- DELETE FROM Frecuenta WHERE DniPersona = '32595830' AND NombreBar = 'COSMOS'
