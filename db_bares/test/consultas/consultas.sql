@@ -64,7 +64,7 @@ SELECT *
 FROM Frecuenta f 
 WHERE f.DniPersona NOT IN -- Todos los bares que sirven Todas las cervezas que le gusta a <f.DniPersona>
 (
-    SELECT fre.DniPersona
+    SELECT DISTINCT fre.DniPersona
     FROM Frecuenta fre 
     WHERE fre.NombreBar NOT IN -- Todos los bares que sirven cerevezas que NO le gustan a <fre.DniPersona>
     (
