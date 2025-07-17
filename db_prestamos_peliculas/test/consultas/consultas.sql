@@ -110,10 +110,11 @@ CREATE TABLE Usuario
 
 INSERT INTO Usuario(Nombre, pass)
 VALUES 
-('Redondos_11', HASHBYTES('SHA2_256', 'FnAZW3187*'))
+('Redondos_11_44', HASHBYTES('SHA2_256', 'S3CR3T'))
 
+DELETE FROM Usuario
 
 
 DECLARE @R NVARCHAR(MAX)
-EXEC sp_Login 'Usuario', 'nombre', 'Redondos_11', 'pass', 'FnAZW3187*', @RESULTADO =  @R OUTPUT
+EXEC sp_Login 'Usuario', 'nombre', 'Redondos_11_44', 'pass', 'S3CR3T', @RESULTADO =  @R OUTPUT
 PRINT(@R)
