@@ -1,4 +1,4 @@
-USE db_con_visual_studio
+
 /**
 	Funci�n de devuelve una cadena con letras aleatorias
 	Para su uso es necesario crear la vista:
