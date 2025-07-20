@@ -20,7 +20,7 @@ BEGIN
     EXEC sp_Insertar_Genero 'misterios'
     EXEC sp_Insertar_Genero 'psicodelicas'
     EXEC sp_Insertar_Genero 'románticas'
-
+    EXEC sp_Insertar_Genero 'policial'
 
     -- Insertar películas 
     EXEC sp_Insertar_Pelicula 'Rambo 3', 150, 1978, 'acción'

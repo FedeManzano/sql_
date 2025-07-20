@@ -1,5 +1,3 @@
-USE db_con_visual_studio
-
 
 GO
 CREATE OR ALTER FUNCTION f_Format_Tittle (@W VARCHAR(MAX))

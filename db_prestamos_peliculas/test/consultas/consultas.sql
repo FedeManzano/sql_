@@ -115,6 +115,21 @@ VALUES
 DELETE FROM Usuario
 
 
-DECLARE @R NVARCHAR(MAX)
-EXEC sp_Login 'Usuario', 'nombre', 'Redondos_11_44', 'pass', 'S3CR3T', @RESULTADO =  @R OUTPUT
+DECLARE @R CHAR(1)
+EXEC sp_Login 'usuario', 'nombre', 'Redondos_11_44', 'pass', 'S3CR3T', @RESULTADO =  @R OUTPUT
 PRINT(@R)
+
+
+SELECT * FROM dbo.f_Alquilo_Mas_Peliculas()
+SELECT * FROM dbo.f_Alquilo_Menos_Peliculas()
+
+
+
+DECLARE @P_TERMINADOS_ENTRE VARCHAR(MAX) = dbo.f_Prestamos_Terminados_Entre_F('2025-01-01', '2025-01-03')
+EXEC (@P_TERMINADOS_ENTRE)
+SELECT * FROM Prestamo
+
+
+SELECT * FROM dbo.f_Prestamos_No_Terminados_Entre('2025-01-01', '2025-02-10')
+
+SELECT  dbo.f_Mes_Mas_Alquileres_Año(2025) AS MES_MAS_ALQUILERES
