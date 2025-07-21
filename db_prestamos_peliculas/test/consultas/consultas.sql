@@ -133,3 +133,13 @@ SELECT * FROM Prestamo
 SELECT * FROM dbo.f_Prestamos_No_Terminados_Entre('2025-01-01', '2025-02-10')
 
 SELECT  dbo.f_Mes_Mas_Alquileres_Año(2025) AS MES_MAS_ALQUILERES
+
+SELECT dbo.f_Precio_Total_Abonar('A-071')
+SELECT dbo.f_Promedio_prestamos_Completados()
+
+
+SELECT RETRASO.COD_PRES, DATEDIFF(DAY, PRE.FechaPrestamo, GETDATE())
+FROM Prestamo PRE INNER JOIN dbo.f_Prestamos_Con_Retraso() AS RETRASO ON PRE.CodPrestamo = RETRASO.COD_PRES
+
+
+SELECT * FROM vw_Peluculas_Mas_Vistas_De_Cada_Mes_Del_Ultimo_Año

@@ -5,10 +5,15 @@ RETURNS DECIMAL(10,2)
 BEGIN 
     RETURN 
     (
-        SELECT COUNT(CodPrestamo) * dbo.f_Precio()
+        SELECT
+        CASE 
+            WHEN COUNT(CodPrestamo) = 0 THEN 0
+            ELSE COUNT(CodPrestamo) * dbo.f_Precio()
+        END AS PRECIO_TOTAL
         FROM Prestamo
         WHERE CodSocio = @COD_SOC AND 
         FechaDevolucion IS NULL
+        GROUP BY FechaPrestamo
     )
 END
 GO

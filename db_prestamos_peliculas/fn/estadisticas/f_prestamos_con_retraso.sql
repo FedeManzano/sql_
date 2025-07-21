@@ -7,6 +7,6 @@ AS
     (
         SELECT PRE.CodPrestamo COD_PRES
         FROM Prestamo PRE 
-        WHERE --PRE.FechaDevolucion IS NULL AND 
+        WHERE PRE.FechaDevolucion IS NULL AND 
              DATEDIFF(DAY, PRE.FechaPrestamo, GETDATE()) > 3
     )

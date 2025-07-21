@@ -208,5 +208,5 @@ BEGIN
     EXEC sp_Generar_Devolucion 'FGL-352', '2025-01-14', '2025-01-10', 1, 25
     EXEC sp_Generar_Devolucion'XWR-472', '2025-01-14', '2025-01-10', 1, 9
 END
-GO 
+GO   
 
